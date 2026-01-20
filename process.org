@@ -1,5 +1,5 @@
 
-#+title: process record
+#+title: Process record
 #+author: oddloops
 * DONE Create main.cpp files
 CLOSED: [2026-01-18 Sun 22:39]
