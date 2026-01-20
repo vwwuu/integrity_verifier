@@ -10,5 +10,6 @@ CLOSED: [2026-01-18 Sun 22:45]
 CLOSED: [2026-01-19 Mon 22:52]
 * CMake
 1. The first line should always be /cmake_minimum_required(${VERSION})/
-2. Then, set the project name, executable file name, using /add_executables(${PROJECT_NAME})
+2. Then, set the project name, executable file name, using /add_executables(${PROJECT_NAME})/
 3. Define your targets using /target_sources/
+* TODO 
