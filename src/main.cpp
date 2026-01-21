@@ -2,6 +2,11 @@
 using namespace std;
 
 int main () {
-  cout << "Hello world C++" << endl;
+  string cliInput = "";
+
+  cout << "Type something or CTRL+C to exit: ";
+  cin >> cliInput;
+  cout << cliInput << endl;
+  
   return 0;
 }
