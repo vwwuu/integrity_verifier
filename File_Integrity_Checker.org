@@ -1,0 +1,33 @@
+#+title: File Integrity Verifier Process record
+#+author: oddloops
+* Project Idea
+A program to record and verify if a file was modified.
+** Features
+*** Modes:
+- Record - tracks the:
+  1. Filename
+  2. File extension
+  3. File contents
+  4. Time created
+  5. Time last modified
+  6. File hash
+- Verify - compares:
+  1. Current file to existing (if present)
+  2. Displays any differences
+/*(Subject to change)
+*** Input
+**** DONE Allow user input mode selection
+CLOSED: [2026-01-25 Sun 18:35]
+**** DONE Create checks for valid/invalid input
+CLOSED: [2026-01-25 Sun 18:53]
+*** Record Mode
+**** TODO Read file properties
+**** TODO Store file information
+*** Verify Mode
+*** File storage
+*** CMakeList txt updates
+**** DONE Add compile options for all warnings (global)
+CLOSED: [2026-01-25 Sun 19:50]
+
+
+
