@@ -1,16 +1,33 @@
 #include <gtest/gtest.h>
+#include <stdexcept>
 #include "../include/RecordMode.h"
-
-class RecordModeTest : public testing::Test
+/*
+class RecordModeTestClass : public testing::Test
 {
 protected:
-  RecordMode recordTest = RecordMode();
+  RecordMode recordTest = RecordMode("/home/mintvoyager/GitHub/projects/integrity_verifier/tests/testing_directories/test");
 };
+*/
+TEST(RecordModeTest, InvalidDirectory) {
+  std::filesystem::path testDirectory = "/home/mintvoyager/GitHub/projects/integrity_verifier/tests/testing_directories/tset";
 
-TEST_F(RecordModeTest, InvalidDirectoryName) {
-  EXPECT_FALSE(recordTest.verifyDirectory("tset"));
+  EXPECT_THROW({
+      try
+	{
+	  RecordMode rm {testDirectory};
+	}
+      catch (const std::runtime_error& e)
+	{
+	  std::string expected = "Invalid directory, given: " + testDirectory.string();
+	  EXPECT_STREQ(expected.c_str(), e.what());
+	  throw;
+	}
+    }, std::runtime_error);
 }
 
-TEST_F(RecordModeTest, ValidDirectoryName) {
-  EXPECT_TRUE(recordTest.verifyDirectory("test/t1"));
+TEST(RecordModeTest, ValidDirectory) {
+  std::filesystem::path testDirectory = "/home/mintvoyager/GitHub/projects/integrity_verifier/tests/testing_directories/test";
+  EXPECT_NO_THROW({
+      RecordMode rm {testDirectory};
+    });
 }
