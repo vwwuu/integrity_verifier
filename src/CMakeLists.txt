@@ -4,7 +4,7 @@ target_sources(${PROJECT_NAME}
 	PRIVATE
 		main.cc
 		status_out.cc
-		RecordMode.cc
+		IntegrityCore.cc
 	PUBLIC
 		FILE_SET HEADERS
 		BASE_DIRS
@@ -12,5 +12,5 @@ target_sources(${PROJECT_NAME}
 		FILES
 			${PROJECT_SOURCE_DIR}/include/status_out.h
 			${PROJECT_SOURCE_DIR}/include/statuses.h
-			${PROJECT_SOURCE_DIR}/include/RecordMode.h			
+			${PROJECT_SOURCE_DIR}/include/IntegrityCore.h			
 )
