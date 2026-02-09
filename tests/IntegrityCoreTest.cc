@@ -8,12 +8,17 @@ protected:
   IntegrityCore core;
 };
 
-TEST_F(IntegrityCoreTestClass, InvalidDirectory) {
-  std::filesystem::path testDirectory = "/home/mintvoyager/GitHub/projects/integrity_verifier/tests/testing_directories/tset";
-  EXPECT_FALSE(core.validateDirectory(testDirectory));
+TEST_F(IntegrityCoreTestClass, InvalidDirectoryBool) {
+  const std::filesystem::path p1 = "sandbox/t1";
+  std::filesystem::create_directories(p1);
+  const std::filesystem::path p2 = "sandbox/t2";
+  EXPECT_FALSE(core.validateDirectory(p2).validateBool);
+  std::filesystem::remove_all("sandbox");
 }
 
-TEST_F(IntegrityCoreTestClass, ValidDirectory) {
-  std::filesystem::path testDirectory = "/home/mintvoyager/GitHub/projects/integrity_verifier/tests/testing_directories/test";
-  EXPECT_FALSE(core.validateDirectory(testDirectory));
+TEST_F(IntegrityCoreTestClass, ValidDirectoryBool) {
+  const std::filesystem::path p = "sandbox/t1";
+  std::filesystem::create_directories(p);
+  EXPECT_TRUE(core.validateDirectory(p).validateBool);
+  std::filesystem::remove_all("sandbox");
 }
