@@ -20,19 +20,25 @@ A program to record and verify if a file was modified.
 CLOSED: [2026-01-25 Sun 18:35]
 **** DONE Create checks for valid/invalid input
 CLOSED: [2026-01-25 Sun 18:53]
-*** Record Mode
-**** TODO Read file properties
-**** TODO Store file information
+*** Intergrity verifier core
+**** Validator
+***** DONE Remove hardcoded test directory path
+CLOSED: [2026-02-08 Sun 20:34]
+***** IN-PROGRESS Create new tests for new validator return type
+**** Directory/subdirectory traversal
+**** Hash Computation
+*** Write (Record) Mode
 *** Verify Mode
-*** File storage
+*** New structs
+**** DONE Create new return type for validator
+CLOSED: [2026-02-08 Sun 20:33]
+**** DONE Create struct for file storage
+CLOSED: [2026-02-08 Sun 20:33]
 *** CMakeList txt updates
 **** DONE Add compile options for all warnings (global)
-CLOSED: [2026-01-25 Sun 19:50]
+CLOSED: [2026-01-25 Sun 19:50]p
 **** DONE Testing framework
 CLOSED: [2026-02-01 Sun 22:40]
 ***** [X] Add test framework (Google Test)
 ***** [X] Create basic test
 ***** [X] Create TDD tests for Record
-*** Later items (after first working version)
-**** Implement own file directory traversal
-Current version is expected to utilize the /nftw()/ function.
