@@ -24,9 +24,7 @@ CLOSED: [2026-01-25 Sun 18:53]
 **** Validator
 ***** DONE Remove hardcoded test directory path
 CLOSED: [2026-02-08 Sun 20:34]
-***** DONE Create new tests for new validator return type
-CLOSED: [2026-02-09 Mon 22:57]
-**** RESEARCHING Directory/subdirectory traversal
+**** IN-PROGRESS Directory/subdirectory traversal
 **** RESEARCHING Hash Computation
 *** Write (Record) Mode
 **** Call Integrity core
