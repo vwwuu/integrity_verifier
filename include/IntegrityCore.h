@@ -14,8 +14,8 @@ class IntegrityCore
 {
  public:
   ValidateMessage validateDirectory(const std::filesystem::path& targetDirectory);
-  std::string computeHash(const std::filesystem::path& filePath);
   std::map<std::filesystem::path, FileInfo> getDirectoryContents(const std::filesystem::path& targetDirectory) const;
+  std::string computeHash(const std::filesystem::path& filePath);
   bool readRecord(const std::string& recordFile) const;
 };
 
