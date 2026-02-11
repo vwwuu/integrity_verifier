@@ -27,10 +27,14 @@ CLOSED: [2026-02-08 Sun 20:34]
 **** IN-PROGRESS Directory/subdirectory traversal
 **** RESEARCHING Hash Computation
 *** Write (Record) Mode
+**** TODO Create a preview output that will show the "tree" structure of the directory's contents
 **** Call Integrity core
 **** output manifest
 *** Verify Mode
+**** Accepts name input
+***** If no name, displays an list of recorded directory manifests
 **** Implement a compare
+**** TODO Create a preview output that will show the "tree" structure of the directory's contents
 *** New structs
 **** DONE Create new return type for validator
 CLOSED: [2026-02-08 Sun 20:33]
@@ -44,3 +48,5 @@ CLOSED: [2026-02-01 Sun 22:40]
 ***** [X] Add test framework (Google Test)
 ***** [X] Create basic test
 ***** [X] Create TDD tests for Record
+*** Future items/ideas
+**** UI display for input and output.
