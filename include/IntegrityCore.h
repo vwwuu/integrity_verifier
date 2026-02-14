@@ -22,7 +22,7 @@ class IntegrityCore
 
 private:
   void setFileInfo(FileInfo& fi, std::filesystem::path const& p);
-  std::string getFileName(std::filesystem::path& p) const;
+  std::string getFileName(std::filesystem::path const& p) const;
   std::string getFileExtension(std::filesystem::path const& p) const;
   u_int64_t getFileSize(std::filesystem::path const& p) const;
   std::filesystem::perms getPermissions(std::filesystem::path const& p) const;
