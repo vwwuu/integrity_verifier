@@ -5,6 +5,18 @@
 #include "../include/FileInfo.h"
 
 namespace TestHelpers {
+  void createFile(std::filesystem::path const& p, std::string_view pContents) {
+    std::ofstream newFile(p);
+    newFile << pContents;
+  }
+
+  bool compareFileInfo (FileInfo const& f1, FileInfo const& f2) {
+    if (f1.fileName != f2.fileName) return false;
+    if (f1.filePath != f2.filePath) return false;
+    if (f1.fileExtension != f2.fileExtension) return false;
+    return true;
+  }
+  
   bool getDirectoryTestHelper(
 			      const std::map<std::filesystem::path, FileInfo>& m1,
 			      const std::map<std::filesystem::path, FileInfo>& m2
@@ -18,10 +30,9 @@ namespace TestHelpers {
       if (m2Path == m2.end()) return false;
       
       const FileInfo m2Info = m2Path->second;
-      if (m1Info.fileName != m2Info.fileName) return false;
-      if (m1Info.filePath != m2Info.filePath) return false;
-      if (m1Info.fileExtension != m2Info.fileExtension) return false;
-      if (m1Info.fileHash != m2Info.fileHash) return false;
+      if (!compareFileInfo(m1Info, m2Info)) {
+	return false;
+      }
     }
     return true;
   }
