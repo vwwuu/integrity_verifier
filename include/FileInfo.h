@@ -8,7 +8,6 @@
 struct FileInfo {
   std::string fileName;
   std::filesystem::path filePath;
-  std::string fileType;
   std::string fileExtension;
   std::string fileHash;
   std::chrono::time_point<std::chrono::system_clock> recordTimestamp;
