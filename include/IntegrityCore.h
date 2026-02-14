@@ -13,10 +13,9 @@
 class IntegrityCore
 {
  public:
-  bool validateDirectory(const std::filesystem::path& targetDirectory) const;
-  std::map<std::filesystem::path, FileInfo> getDirectoryContents(const std::filesystem::path& targetDirectory) const;
-  std::string computeHash(const std::filesystem::path& filePath);
-  bool readRecord(const std::string& recordFile) const;
+  bool validateDirectory(std::filesystem::path const& targetDirectory) const;
+  std::map<std::filesystem::path, std::map<std::filesystem::path, FileInfo>> getDirectoryContents(std::filesystem::path const& targetDirectory) const;
+  bool readRecord(std::string const& recordFile) const;
 };
 
 #endif
