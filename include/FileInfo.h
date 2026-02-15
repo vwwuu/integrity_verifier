@@ -11,10 +11,10 @@ struct FileInfo {
   std::filesystem::path filePath;
   std::string fileExtension;
   u_int64_t fileSize;
-  std::string fileHash;
-  std::chrono::time_point<std::chrono::system_clock> lastModified;
-  std::chrono::time_point<std::chrono::system_clock> recordTimestamp;
   std::filesystem::perms permissions;
+  std::string fileHash;
+  std::filesystem::file_time_type lastModified;
+  std::chrono::time_point<std::chrono::system_clock> recordTimestamp;
 };
 
 #endif
