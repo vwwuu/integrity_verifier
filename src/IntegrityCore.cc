@@ -1,5 +1,6 @@
 #include "../include/IntegrityCore.h"
 #include <map>
+#include <sys/types.h>
 
 bool IntegrityCore::validateDirectory(std::filesystem::path const& targetDirectory) const
 {
@@ -58,4 +59,9 @@ std::string IntegrityCore::getFileName(std::filesystem::path const& p) const {
 }
 
 std::string IntegrityCore::getFileExtension(std::filesystem::path const& p) const {
+  return p.extension().string();
+}
+
+u_int64_t IntegrityCore::getFileSize(std::filesystem::path const& p) const {
+  return std::filesystem::file_size(p);
 }
