@@ -1,34 +1,33 @@
-#include "../include/statuses.h"
+#include "../include/Statuses.h"
 #include "../include/status_out.h"
 
 #include <cctype>
 #include <iostream>
 #include <limits>
-using namespace std;
 
 #define ATTEMPT_LIMITS 3
 
 int main () {
   int attempts = ATTEMPT_LIMITS;
-  int modeSelected = -1;
+  std::string modeSelected = "";
   
-  cout << "Please selected a mode:" << endl;
-  cout << "(1) Record mode" << endl;
-  cout << "(2) Read mode" << endl;
-  cout << "(3) Verify mode" << endl;
-  cout << "(Exit) Enter any key" << endl;
-  cout << "Mode: ";
-  cin >> modeSelected;
+  std::cout << "Please selected a mode:" << std::endl;
+  std::cout << "(1) Record mode" << std::endl;
+  std::cout << "(2) Read mode" << std::endl;
+  std::cout << "(3) Verify mode" << std::endl;
+  std::cout << "(Exit)" << std::endl;
+  std::cout << "Mode: ";
+  std::cin >> modeSelected;
 
-  while (!cin && attempts > 0) {
-    cout << "Bad input.(" << attempts << " attempts remaining)"<< endl;
+  while (!std::cin && attempts > 0) {
+    std::cout << "Bad input.(" << attempts << " attempts remaining)"<< std::endl;
     --attempts;
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Select mode: ";
-    cin >> modeSelected;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Select mode: ";
+    std::cin >> modeSelected;
   }
   
-  print_status(modeSelected);
+  print_status(normalizeInput(modeSelected));
   return 0;
 }
