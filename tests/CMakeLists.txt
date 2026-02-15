@@ -18,6 +18,7 @@ add_executable(IntegrityCoreTest)
 target_sources(IntegrityCoreTest
 	PRIVATE
 		IntegrityCoreTest.cc
+		TestHelpers.cc
 		${PROJECT_SOURCE_DIR}/src/IntegrityCore.cc
 	PUBLIC
 		FILE_SET HEADERS
