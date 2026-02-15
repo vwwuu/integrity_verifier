@@ -11,6 +11,7 @@ target_sources(${PROJECT_NAME}
 			${PROJECT_SOURCE_DIR}/include
 		FILES
 			${PROJECT_SOURCE_DIR}/include/status_out.h
-			${PROJECT_SOURCE_DIR}/include/statuses.h
+			${PROJECT_SOURCE_DIR}/include/Statuses.h
+			${PROJECT_SOURCE_DIR}/include/AcceptedFiles.h
 			${PROJECT_SOURCE_DIR}/include/IntegrityCore.h			
 )
