@@ -26,8 +26,8 @@ private:
   std::string getFileExtension(std::filesystem::path const& p) const;
   u_int64_t getFileSize(std::filesystem::path const& p) const;
   std::filesystem::perms getPermissions(std::filesystem::path const& p) const;
-  std::chrono::time_point<std::chrono::system_clock> getLastModifiedTime(std::filesystem::path const& p) const;
-  std::chrono::time_point<std::chrono::system_clock> setRecordTime(std::filesystem::path const& p) const;
+  std::filesystem::file_time_type getLastModifiedTime(std::filesystem::path const& p) const;
+  std::chrono::time_point<std::chrono::system_clock> recordTimestamp() const;
 };
 
 #endif
