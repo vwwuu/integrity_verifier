@@ -3,33 +3,36 @@
 #include <map>
 #include <sys/types.h>
 
-bool IntegrityCore::validatePath(std::filesystem::path const& p, AcceptedFile fType) const {
+bool IntegrityCore::validatePath(std::filesystem::path const& p, AcceptedFSType fType) const {
   std::error_code ec;
   std::filesystem::file_status s = std::filesystem::symlink_status(p, ec);
 
-  if (ec) {
+  if (ec) { // handles exception
     std::cout << "Filesystem error: " << ec.message() << std::endl;
     return false;
   }
   if (!std::filesystem::exists(s)) return false;
-  if (fType == AcceptedFile::DIRECTORY && std::filesystem::is_directory(s)) return true;
-  if (fType == AcceptedFile::FILE && std::filesystem::is_regular_file(s)) return true;
+  if (fType == AcceptedFSType::DIRECTORY && std::filesystem::is_directory(s)) return true;
+  if (fType == AcceptedFSType::FILE && std::filesystem::is_regular_file(s)) return true;
   return false;
 }
 
-std::map<std::filesystem::path, std::map<std::filesystem::path, FileInfo>> IntegrityCore::getDirectoryContents(std::filesystem::path const& targetDirectory) const
+DirectoryContent IntegrityCore::scanDirectory(std::filesystem::path const& targetDirectory) const
 {
-  std::map<std::filesystem::path, std::map<std::filesystem::path, FileInfo>> directoryPaths;
-  if (!this->validatePath(targetDirectory, AcceptedFile::DIRECTORY)) {
-    return directoryPaths;
+  DirectoryContent contents;
+  if (!validatePath(targetDirectory, AcceptedFSType::DIRECTORY)) {
+    return contents;
   }
 
-  for (auto const& dir_entry : std::filesystem::recursive_directory_iterator(targetDirectory)) {
-    std::cout << dir_entry << std::endl;
-    auto const& fileData = std::filesystem::status(dir_entry);
-    if (std::filesystem::is_directory(fileData)) continue;
+  std::error_code ec;
+  for (auto const& dir_entry : std::filesystem::recursive_directory_iterator(targetDirectory, ec)) {
+    const auto dirPath = dir_entry.path();
+    if (validatePath(dirPath, AcceptedFSType::DIRECTORY)) continue;
+    if (validatePath(dirPath, AcceptedFSType::FILE)) {
+      //TODO
+    }
   }
-  return directoryPaths;
+  return contents;
 }
 
 std::string IntegrityCore::computeHash(std::filesystem::path const& filePath) const {
