@@ -1,12 +1,12 @@
-#ifndef DIRECTORY_CONTENTS_H
-#define DIRECTORY_CONTENTS_H
+#ifndef DIRECTORY_CONTENT_H
+#define DIRECTORY_CONTENT_H
 
 #include <filesystem>
 #include <vector>
 
 #include "FileInfo.h"
 
-struct DirectoryContents {
+struct DirectoryContent {
   std::filesystem::path directoryPath;
   std::vector<std::filesystem::path> subdirectories;
   std::vector<FileInfo> files;
