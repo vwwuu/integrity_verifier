@@ -20,7 +20,7 @@ int main () {
   std::cin >> modeSelected;
 
   while (!std::cin && attempts > 0) {
-    std::cout << "Bad input.(" << attempts << " attempts remaining)"<< std::endl;
+    std::cout << "Bad input.(" << attempts << " attempts remaining)"<< "\n";
     --attempts;
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
