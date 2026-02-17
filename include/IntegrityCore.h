@@ -5,18 +5,18 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include <map>
 #include <sys/types.h>
 
 #include "ValidateMessage.h"
-#include "AcceptedFiles.h"
+#include "AcceptedFSType.h"
 #include "FileInfo.h"
+#include "DirectoryContent.h"
 
 class IntegrityCore
 {
  public:
-  bool validatePath(std::filesystem::path const& p, AcceptedFile fType) const;
-  std::map<std::filesystem::path, std::map<std::filesystem::path, FileInfo>> getDirectoryContents(std::filesystem::path const& targetDirectory) const;
+  bool validatePath(std::filesystem::path const& p, AcceptedFSType fType) const;
+  DirectoryContent scanDirectory(std::filesystem::path const& dPath);
   std::string computeHash(std::filesystem::path const& filePath) const;
   FileInfo createFileInfo(std::filesystem::path const& directory_entry);
   bool readRecord(std::string const& recordFile) const;
