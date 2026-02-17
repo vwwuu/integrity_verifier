@@ -1,6 +1,7 @@
 #include "../include/IntegrityCore.h"
 #include <chrono>
 #include <map>
+#include <ostream>
 #include <sys/types.h>
 
 bool IntegrityCore::validatePath(std::filesystem::path const& p, AcceptedFSType fType) const {
@@ -17,19 +18,23 @@ bool IntegrityCore::validatePath(std::filesystem::path const& p, AcceptedFSType 
   return false;
 }
 
-DirectoryContent IntegrityCore::scanDirectory(std::filesystem::path const& targetDirectory) const
-{
+DirectoryContent IntegrityCore::scanDirectory(std::filesystem::path const& dPath) {
   DirectoryContent contents;
-  if (!validatePath(targetDirectory, AcceptedFSType::DIRECTORY)) {
+  if (!validatePath(dPath, AcceptedFSType::DIRECTORY)) { // validate if given path is a directory
     return contents;
   }
-
+  contents.directoryPath = dPath;
+  
   std::error_code ec;
-  for (auto const& dir_entry : std::filesystem::recursive_directory_iterator(targetDirectory, ec)) {
+  for (auto const& dir_entry : std::filesystem::recursive_directory_iterator(dPath, ec)) {
     const auto dirPath = dir_entry.path();
-    if (validatePath(dirPath, AcceptedFSType::DIRECTORY)) continue;
-    if (validatePath(dirPath, AcceptedFSType::FILE)) {
-      //TODO
+    if (validatePath(dirPath, AcceptedFSType::DIRECTORY)) {
+      std::cout << "Subdirectory: " << dirPath << std::endl;
+      contents.subdirectories.push_back(dirPath);
+    }
+    else if (validatePath(dirPath, AcceptedFSType::FILE)) {
+      std::cout << "Dir File: " << dirPath << std::endl;
+      contents.files.push_back(createFileInfo(dirPath));
     }
   }
   return contents;
