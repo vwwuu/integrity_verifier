@@ -43,7 +43,8 @@ TEST_F(IntegrityCoreTestClass, ValidateDirectory) {
   
   EXPECT_TRUE(core.validatePath(p1, AcceptedFSType::DIRECTORY));
 
-  std::filesystem::remove_all(root);
+  std::error_code ec;
+  std::filesystem::remove_all(root, ec);
 }
 
 TEST_F(IntegrityCoreTestClass, ValidateFile) {
@@ -54,16 +55,19 @@ TEST_F(IntegrityCoreTestClass, ValidateFile) {
   
   EXPECT_TRUE(core.validatePath(p/"fileP1.txt", AcceptedFSType::FILE));
 
-  std::filesystem::remove_all(root);
+  std::error_code ec;
+  std::filesystem::remove_all(root, ec);
 }
 
 TEST_F(IntegrityCoreTestClass, ValidateBadFile) {
-  const std::filesystem::path p = "sandbox/t1";
+  const std::filesystem::path root = std::filesystem::temp_directory_path() / "ValidateBTest";
+  const std::filesystem::path p = root/"t1";
   std::filesystem::create_directories(p);
   
-  EXPECT_FALSE(core.validatePath("sandbox/t2", AcceptedFSType::FILE));
+  EXPECT_FALSE(core.validatePath(root/"t2", AcceptedFSType::FILE));
 
-  std::filesystem::remove_all(p);
+  std::error_code ec;
+  std::filesystem::remove_all(root, ec);
 }
 
 TEST_F(IntegrityCoreTestClass, CreateFileInfo) {
