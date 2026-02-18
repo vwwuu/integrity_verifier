@@ -12,7 +12,7 @@ protected:
 };
 
 TEST_F(IntegrityCoreTestClass, ValidateThrowHandle) {
-  const std::filesystem::path root = std::filesystem::temp_directory_path() / "validateThrowTest";
+  const std::filesystem::path root = std::filesystem::temp_directory_path() / "ValidateThrowTest";
   const std::filesystem::path p = root/"t1";
   
   std::filesystem::create_directories(p);
@@ -37,7 +37,7 @@ TEST_F(IntegrityCoreTestClass, ValidateThrowHandle) {
 }
 
 TEST_F(IntegrityCoreTestClass, ValidateDirectory) {
-  const std::filesystem::path root = "sandbox";
+  const std::filesystem::path root = std::filesystem::temp_directory_path() / "ValidateDTest";
   const std::filesystem::path p1 = root/"t1";
   std::filesystem::create_directories(p1);
   
