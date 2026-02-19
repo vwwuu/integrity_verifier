@@ -26,18 +26,19 @@ DirectoryContent IntegrityCore::scanDirectory(std::filesystem::path const& dPath
   contents.directoryPath = dPath;
   
   std::error_code ec;
-  for (auto const& dir_entry : std::filesystem::recursive_directory_iterator(dPath, ec)) {
+  for (auto const& dir_entry : std::filesystem::directory_iterator(dPath, ec)) {
     const auto dirPath = dir_entry.path();
     if (validatePath(dirPath, AcceptedFSType::DIRECTORY)) {
-      std::cout << "Subdirectory: " << dirPath << std::endl;
-      contents.subdirectories.push_back(dirPath);
+      contents.subdirectories.push_back(scanDirectory(dirPath));
     }
     else if (validatePath(dirPath, AcceptedFSType::FILE)) {
-      std::cout << "Dir File: " << dirPath << std::endl;
       contents.files.push_back(createFileInfo(dirPath));
     }
   }
-  std::sort(contents.subdirectories.begin(), contents.subdirectories.end());
+  std::sort(contents.subdirectories.begin(), contents.subdirectories.end(),
+	    [](auto const& a, auto const& b) {
+	      return a.directoryPath.string() < b.directoryPath.string();
+	    });
   std::sort(contents.files.begin(), contents.files.end(),
             [](auto const &a, auto const &b) {
               return a.filePath.string() < b.filePath.string();
