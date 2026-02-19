@@ -1,4 +1,5 @@
 #include "include/TestHelpers.h"
+#include <iostream>
 #include <system_error>
 
 namespace TestHelpers {
@@ -14,28 +15,48 @@ namespace TestHelpers {
     return true;
   }
 
-  void contentsOut(DirectoryContent const& dc) {
-    int i = 0;
-    std::cout << "Root Directory: " << dc.directoryPath.string() << std::endl;
-    std::cout << "Subdirectories" << std::endl;
-    for (auto& sd : dc.subdirectories) {
-      std::cout << "(" << ++i << ") " << sd.string() << "\n";
+  void contentsOut(DirectoryContent const& dc, int _indent) {
+    std::string indent(_indent, ' ');
+
+    if (_indent==0) {
+      std::cout << "Root Directory: " << dc.directoryPath.string() << "\n";
+    } else {
+      std::cout << indent << "Directory: " << dc.directoryPath.string() << "\n";
     }
-    i = 0;
-    std::cout << "Files" << std::endl;
-    for (auto& fi : dc.files) {
-      std::cout << "File (" << ++i << ")\n";
-      TestHelpers::fiOut(std::cout, fi);
+    
+    // Files
+    std::cout << indent << "[Files]\n";
+    if (dc.files.size() == 0) {
+      std::cout << indent << "NO FILES\n";
+    } else {
+      std::cout << indent << "Num of files: " << dc.files.size() << '\n';
+      for (auto const &fi : dc.files) {
+        TestHelpers::fiOut(std::cout, fi, _indent);
+      }
+    }
+    std::cout << '\n';
+    
+    // Subdirectories
+    std::cout << indent << "[Subdirectories]\n";
+    if (dc.subdirectories.size() == 0) {
+      std::cout << indent << "NO SUBDIRECTORIES\n";
+    } else {
+      std::cout << indent << "Num of subdirectories: " << dc.subdirectories.size() << '\n';
+      for (auto &sd : dc.subdirectories) {
+	contentsOut(sd, _indent+4);
+	std::cout << "\n";
+      }
     }
   }
   
-  std::ostream& fiOut(std::ostream& os, const FileInfo& fi) {
-    os << " Name: " << fi.fileName << "\n"
-       << " Path: " << fi.filePath.string() << "\n"
-       << " Extension: " << fi.fileExtension << "\n"
-       << " Size: " << fi.fileSize << "\n"
-       << " Permissions: " << permsToString(fi.permissions) << "\n"
-       << " Hash: " << fi.fileHash << "\n";
+  std::ostream& fiOut(std::ostream& os, const FileInfo& fi, int _indent) {
+    std::string indent(_indent, ' ');
+    os << indent << "Name: " << fi.fileName << "\n"
+       << indent << "Path: " << fi.filePath.string() << "\n"
+       << indent << "Extension: " << fi.fileExtension << "\n"
+       << indent << "Size: " << fi.fileSize << "\n"
+       << indent << "Permissions: " << permsToString(fi.permissions) << "\n"
+       << indent << "Hash: " << fi.fileHash << "\n";
       //       << " Last Modified: " << fi.lastModified << "\n"
       //       << " Timestamp: " << fi.recordTimestamp << "\n";
     return os;
