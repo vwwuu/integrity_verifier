@@ -8,8 +8,8 @@
 
 struct DirectoryContent {
   std::filesystem::path directoryPath;
-  std::vector<std::filesystem::path> subdirectories;
   std::vector<FileInfo> files;
+  std::vector<DirectoryContent> subdirectories;
 };
 
 #endif
