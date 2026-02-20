@@ -32,12 +32,13 @@ CLOSED: [2026-02-15 Sun 21:25]
 CLOSED: [2026-02-15 Sun 21:25]
 ***** DONE Create DirectoryObject struct for file info storage
 CLOSED: [2026-02-16 Mon 23:55]
-***** TESTING Directory/subdirectory traversal
+***** DONE Directory/subdirectory traversal
+CLOSED: [2026-02-19 Thu 20:56]
 ***** RESEARCHING Hash Computation
 *** Write (Record) Mode
 **** TODO Create a preview output that will show the "tree" structure of the directory's contents
-**** Call Integrity core
-**** output manifest
+**** TODO Call Integrity core
+**** TODO output manifest
 *** Verify Mode
 **** Accepts name input
 ***** If no name, displays an list of recorded directory manifests
