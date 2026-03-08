@@ -47,7 +47,7 @@ DirectoryContent IntegrityCore::scanDirectory(std::filesystem::path const& dPath
   return contents;
 }
 
-int IntegrityCore::computeHash(std::filesystem::path const& filePath) const {
+int IntegrityCore::computeHash(std::filesystem::path const& filePath, char outBuffer[65]) {
   return 0; // TODO
 }
 
