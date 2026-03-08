@@ -3,6 +3,7 @@
 #include <ostream>
 #include <algorithm>
 #include <sys/types.h>
+#include "openssl/sha.h"
 
 bool IntegrityCore::validatePath(std::filesystem::path const& p, AcceptedFSType fType) const {
   std::error_code ec;
@@ -46,8 +47,8 @@ DirectoryContent IntegrityCore::scanDirectory(std::filesystem::path const& dPath
   return contents;
 }
 
-std::string IntegrityCore::computeHash(std::filesystem::path const& filePath) const {
-  return ""; // TODO
+int IntegrityCore::computeHash(std::filesystem::path const& filePath) const {
+  return 0; // TODO
 }
 
 FileInfo IntegrityCore::createFileInfo(std::filesystem::path const& p)
