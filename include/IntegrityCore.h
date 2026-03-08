@@ -18,7 +18,7 @@ class IntegrityCore
  public:
   bool validatePath(std::filesystem::path const& p, AcceptedFSType fType) const;
   DirectoryContent scanDirectory(std::filesystem::path const& dPath);
-  int computeHash(std::filesystem::path const& filePath, char outputBuffer[65]);
+  std::string computeHash(std::filesystem::path const& filePath);
   FileInfo createFileInfo(std::filesystem::path const& directory_entry);
   bool readRecord(std::string const& recordFile) const;
 
