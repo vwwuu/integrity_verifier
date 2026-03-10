@@ -15,7 +15,6 @@ class IntegrityCore
   bool validatePath(std::filesystem::path const& p, AcceptedFSType fType) const;
   DirectoryContent scanDirectory(std::filesystem::path const& dPath);
   FileInfo createFileInfo(std::filesystem::path const& directory_entry);
-  bool readRecord(std::string const& recordFile) const;
 
 private:
   void setFileInfo(FileInfo& fi, std::filesystem::path const& p);
@@ -29,25 +28,3 @@ private:
 };
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
