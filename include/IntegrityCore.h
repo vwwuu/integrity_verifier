@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <string>
 #include <sys/types.h>
-#include "openssl/sha.h"
+#include "openssl/evp.h"
 
 #include "ValidateMessage.h"
 #include "AcceptedFSType.h"
@@ -18,12 +18,12 @@ class IntegrityCore
  public:
   bool validatePath(std::filesystem::path const& p, AcceptedFSType fType) const;
   DirectoryContent scanDirectory(std::filesystem::path const& dPath);
-  std::string computeHash(std::filesystem::path const& filePath);
   FileInfo createFileInfo(std::filesystem::path const& directory_entry);
   bool readRecord(std::string const& recordFile) const;
 
 private:
   void setFileInfo(FileInfo& fi, std::filesystem::path const& p);
+  std::string computeHash(std::filesystem::path const& filePath);
   std::string getFileName(std::filesystem::path const& p) const;
   std::string getFileExtension(std::filesystem::path const& p) const;
   u_int64_t getFileSize(std::filesystem::path const& p) const;
