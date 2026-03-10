@@ -1,9 +1,13 @@
 #include "../include/IntegrityCore.h"
 #include <chrono>
+#include <fstream>
+#include <openssl/evp.h>
 #include <ostream>
+#include <iomanip>
 #include <algorithm>
+#include <sstream>
 #include <sys/types.h>
-#include "openssl/sha.h"
+#include <vector>
 
 bool IntegrityCore::validatePath(std::filesystem::path const& p, AcceptedFSType fType) const {
   std::error_code ec;
@@ -47,10 +51,6 @@ DirectoryContent IntegrityCore::scanDirectory(std::filesystem::path const& dPath
   return contents;
 }
 
-std::string IntegrityCore::computeHash(std::filesystem::path const& filePath) {
-  return ""; // TODO
-}
-
 FileInfo IntegrityCore::createFileInfo(std::filesystem::path const& p)
 {
   FileInfo fileDetails;
@@ -64,8 +64,38 @@ void IntegrityCore::setFileInfo(FileInfo& fi, std::filesystem::path const& p) {
   fi.fileExtension = getFileExtension(p);
   fi.fileSize = getFileSize(p);
   fi.permissions = getPermissions(p);
+  fi.fileHash = computeHash(p);
   fi.lastModified = getLastModifiedTime(p);
   fi.recordTimestamp = recordTimestamp();
+}
+
+std::string IntegrityCore::computeHash(std::filesystem::path const& filePath) {
+  std::ifstream file(filePath, std::ios::binary);
+  if (!file) {
+    std::cout << "Error reading file" << std::endl;
+    return "";
+  }
+
+  EVP_MD_CTX* ctx = EVP_MD_CTX_new();
+  EVP_DigestInit_ex(ctx, EVP_sha256(), nullptr);
+
+  std::vector<char> buffer(8192);
+  while (file.read(buffer.data(), buffer.size()) || file.gcount() > 0) {
+    EVP_DigestUpdate(ctx, buffer.data(), file.gcount());
+  }
+
+  unsigned char hash[EVP_MAX_MD_SIZE];
+  unsigned int length = 0;
+  EVP_DigestFinal_ex(ctx, hash, &length);
+  EVP_MD_CTX_free(ctx);
+
+  std::ostringstream oss;
+  oss << std::hex << std::setfill('0');
+  
+  for (unsigned int i = 0; i < length; ++i) {
+    oss << std::setw(2) << static_cast<unsigned int>(hash[i]);
+  }
+  return oss.str();
 }
 
 std::string IntegrityCore::getFileName(std::filesystem::path const& p) const {
