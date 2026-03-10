@@ -12,6 +12,5 @@ else ()
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-
 add_subdirectory(src)
 add_subdirectory(tests)

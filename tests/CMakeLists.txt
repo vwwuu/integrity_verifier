@@ -13,24 +13,15 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(IntegrityCoreTest)
-
-target_sources(IntegrityCoreTest
-	PRIVATE
-		IntegrityCoreTest.cc
-		TestHelpers.cc
-		${PROJECT_SOURCE_DIR}/src/IntegrityCore.cc
-	PUBLIC
-		FILE_SET HEADERS
-		BASE_DIRS
-			${PROJECT_SOURCE_DIR}/include
-		FILES
-			${PROJECT_SOURCE_DIR}/include/IntegrityCore.h
+add_executable(IntegrityCoreTest
+	IntegrityCoreTest.cc
+	TestHelpers.cc
 )
 
-target_link_libraries(
-  IntegrityCoreTest
-  GTest::gtest_main
+target_link_libraries(IntegrityCoreTest
+	PRIVATE
+	IntegrityCore
+	GTest::gtest_main
 )
 
 include(GoogleTest)

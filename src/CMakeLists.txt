@@ -1,10 +1,11 @@
-add_executable(${PROJECT_NAME})
+add_executable(${PROJECT_NAME} main.cc)
 
-target_sources(${PROJECT_NAME}
-	PRIVATE
-		main.cc
-		status_out.cc
-		IntegrityCore.cc
+add_library(IntegrityCore
+	IntegrityCore.cc
+	status_out.cc
+)
+
+target_sources(IntegrityCore
 	PUBLIC
 		FILE_SET HEADERS
 		BASE_DIRS
@@ -15,3 +16,8 @@ target_sources(${PROJECT_NAME}
 			${PROJECT_SOURCE_DIR}/include/AcceptedFSType.h
 			${PROJECT_SOURCE_DIR}/include/IntegrityCore.h			
 )
+
+find_package(OpenSSL REQUIRED)
+target_link_libraries(IntegrityCore PUBLIC OpenSSL::Crypto)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE IntegrityCore)
