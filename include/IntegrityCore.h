@@ -2,13 +2,9 @@
 #define INTEGRITY_CORE_H
 
 #include <filesystem>
-#include <iostream>
-#include <stdexcept>
 #include <string>
-#include <sys/types.h>
-#include "openssl/evp.h"
+#include <chrono>
 
-#include "ValidateMessage.h"
 #include "AcceptedFSType.h"
 #include "FileInfo.h"
 #include "DirectoryContent.h"

@@ -1,13 +1,20 @@
-#include "../include/IntegrityCore.h"
-#include <chrono>
+#include "IntegrityCore.h"
+#include "ValidateMessage.h"
+#include "status_out.h"
+#include "Statuses.h"
+#include "AcceptedFSType.h"
+#include "FileInfo.h"
+#include "DirectoryContent.h"
+
+#include <filesystem>
 #include <fstream>
-#include <openssl/evp.h>
-#include <ostream>
 #include <iomanip>
-#include <algorithm>
+#include <iostream>
 #include <sstream>
-#include <sys/types.h>
 #include <vector>
+#include <chrono>
+
+#include <openssl/evp.h>
 
 bool IntegrityCore::validatePath(std::filesystem::path const& p, AcceptedFSType fType) const {
   std::error_code ec;

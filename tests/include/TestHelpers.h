@@ -1,13 +1,12 @@
 #ifndef TESTHELPERS_H
 #define TESTHELPERS_H
 
-#include <fstream>
-#include <map>
+#include <filesystem>
 #include <ostream>
-#include <iostream>
+#include <string_view>
 
-#include "../../include/FileInfo.h"
-#include "../../include/DirectoryContent.h"
+#include "FileInfo.h"
+#include "DirectoryContent.h"
 
 namespace TestHelpers {
   void createFile(std::filesystem::path const& p, std::string_view pContents);
