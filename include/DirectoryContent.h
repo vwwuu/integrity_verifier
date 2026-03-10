@@ -10,7 +10,6 @@ struct DirectoryContent {
   std::filesystem::path directoryPath;
   std::vector<FileInfo> files;
   std::vector<DirectoryContent> subdirectories;
-  int dcHash;
 };
 
 #endif
