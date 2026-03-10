@@ -19,13 +19,35 @@ class IntegrityCore
 
 private:
   void setFileInfo(FileInfo& fi, std::filesystem::path const& p);
-  std::string computeHash(std::filesystem::path const& filePath);
-  std::string getFileName(std::filesystem::path const& p) const;
-  std::string getFileExtension(std::filesystem::path const& p) const;
-  u_int64_t getFileSize(std::filesystem::path const& p) const;
-  std::filesystem::perms getPermissions(std::filesystem::path const& p) const;
-  std::filesystem::file_time_type getLastModifiedTime(std::filesystem::path const& p) const;
-  std::chrono::time_point<std::chrono::system_clock> recordTimestamp() const;
+  static std::string computeHash(std::filesystem::path const& filePath);
+  static std::string getFileName(std::filesystem::path const& p);
+  static std::string getFileExtension(std::filesystem::path const& p);
+  static u_int64_t getFileSize(std::filesystem::path const& p);
+  static std::filesystem::perms getPermissions(std::filesystem::path const& p);
+  static std::filesystem::file_time_type getLastModifiedTime(std::filesystem::path const& p);
+  static std::chrono::time_point<std::chrono::system_clock> recordTimestamp();
 };
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
