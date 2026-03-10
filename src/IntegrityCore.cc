@@ -6,13 +6,12 @@
 #include "FileInfo.h"
 #include "DirectoryContent.h"
 
-#include <filesystem>
+#include <chrono>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <chrono>
 
 #include <openssl/evp.h>
 
@@ -105,27 +104,27 @@ std::string IntegrityCore::computeHash(std::filesystem::path const& filePath) {
   return oss.str();
 }
 
-std::string IntegrityCore::getFileName(std::filesystem::path const& p) const {
+std::string IntegrityCore::getFileName(std::filesystem::path const& p) {
   return p.stem().string();
 }
 
-std::string IntegrityCore::getFileExtension(std::filesystem::path const& p) const {
+std::string IntegrityCore::getFileExtension(std::filesystem::path const& p) {
   return p.extension().string();
 }
 
-u_int64_t IntegrityCore::getFileSize(std::filesystem::path const& p) const {
+u_int64_t IntegrityCore::getFileSize(std::filesystem::path const& p) {
   return std::filesystem::file_size(p);
 }
 
-std::filesystem::perms IntegrityCore::getPermissions(std::filesystem::path const& p) const {
+std::filesystem::perms IntegrityCore::getPermissions(std::filesystem::path const& p) {
   return std::filesystem::status(p).permissions();
 }
 
-std::filesystem::file_time_type IntegrityCore::getLastModifiedTime(std::filesystem::path const& p) const {
+std::filesystem::file_time_type IntegrityCore::getLastModifiedTime(std::filesystem::path const& p) {
   const auto lTime = std::filesystem::last_write_time(p);
   return lTime;
 }
 
-std::chrono::time_point<std::chrono::system_clock> IntegrityCore::recordTimestamp() const {
+std::chrono::time_point<std::chrono::system_clock> IntegrityCore::recordTimestamp() {
   return std::chrono::system_clock::now();
 }
