@@ -34,7 +34,7 @@ CLOSED: [2026-02-15 Sun 21:25]
 CLOSED: [2026-02-16 Mon 23:55]
 ***** DONE Directory/subdirectory traversal
 CLOSED: [2026-02-19 Thu 20:56]
-***** RESEARCHING Hash Computation
+***** TESTING Hash Computation
 *** Write (Record) Mode
 **** TODO Create a preview output that will show the "tree" structure of the directory's contents
 **** TODO Call Integrity core
