@@ -1,7 +1,6 @@
 # File Integrity Verifier
 
-A lightweight C++ project focused on learning modern C++ practices. The File Integrity Verifier scans a given directory, 
-/ extracts metadata and verifies whether changes have occurred since the last recorded state.
+A lightweight C++ project focused on learning modern C++ practices. The File Integrity Verifier scans a given directory, extracts metadata, and verifies whether changes have occurred since the last recorded state.
 
 ## Modes
 * Write (WIP): scans directory and records metadata
