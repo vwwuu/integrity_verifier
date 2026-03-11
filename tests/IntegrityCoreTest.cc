@@ -1,10 +1,12 @@
 #include "IntegrityCore.h"
 #include "include/TestHelpers.h"
 
- #include <filesystem>
+#include <filesystem>
 #include <cstdio>
 #include <fstream>
 #include <stdexcept>
+#include <chrono>
+#include <thread>
 
 #include <gtest/gtest.h>
 
@@ -164,14 +166,22 @@ TEST_F(IntegrityCoreTestClass, FileInfoComparison) {
  
   TestHelpers::createFile(newFile, "Hello c1");
   FileInfo f1 = core.createFileInfo(newFile);
-  
-  std::ofstream temp(newFile);
-  temp << "New written line";
-  temp.close();
+
+  std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+  {
+    std::ofstream temp(newFile);
+    temp << "New written line";
+  }
 
   FileInfo f2 = core.createFileInfo(newFile);
 
   EXPECT_EQ(f1.fileName, f2.fileName);
+  EXPECT_EQ(f1.filePath, f2.filePath);
+  EXPECT_EQ(f1.fileExtension, f2.fileExtension);
+  EXPECT_NE(f1.fileSize, f2.fileSize);
+  EXPECT_EQ(f1.permissions, f2.permissions);
+  EXPECT_NE(f1.fileHash, f2.fileHash);
+  EXPECT_NE(f1.lastModified, f2.lastModified);
 
   std::error_code ec;
   std::filesystem::remove_all(root, ec);
