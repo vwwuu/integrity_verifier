@@ -156,3 +156,23 @@ TEST_F(IntegrityCoreTestClass, ScanDirectoryContents) {
   std::filesystem::remove_all(root, ec);
 }
  
+// Computehash Tests
+TEST_F(IntegrityCoreTestClass, FileInfoComparison) {
+  const std::filesystem::path root = std::filesystem::temp_directory_path() / "ScanDCPermTests";
+  const std::filesystem::path newFile = root/"fileP1.txt";
+  std::filesystem::create_directories(root);
+ 
+  TestHelpers::createFile(newFile, "Hello c1");
+  FileInfo f1 = core.createFileInfo(newFile);
+  
+  std::ofstream temp(newFile);
+  temp << "New written line";
+  temp.close();
+
+  FileInfo f2 = core.createFileInfo(newFile);
+
+  EXPECT_EQ(f1.fileName, f2.fileName);
+
+  std::error_code ec;
+  std::filesystem::remove_all(root, ec);
+}
