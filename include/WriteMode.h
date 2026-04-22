@@ -13,11 +13,13 @@ public:
   explicit WriteMode (IntegrityCore& core);
 
   public:
-  bool run(std::filesystem::path const& directoryPath, std::filesystem::path const& outputPath); // calls writeRecord
+  bool run(std::filesystem::path const& directoryPath,
+	   std::filesystem::path const& outputPath); // calls writeRecord
   
   private:
   IntegrityCore& _core;
-  bool writeRecord(DirectoryContent const& directoryContent, std::filesystem::path const& outputPath); // produce JSON file
+  bool writeRecord(DirectoryContent const& directoryContent,
+		   std::filesystem::path const& outputPath); // produce JSON file
 };
 
 #endif
