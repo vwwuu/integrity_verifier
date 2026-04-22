@@ -13,16 +13,24 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(IntegrityCoreTest
-	IntegrityCoreTest.cc
-	TestHelpers.cc
+function(add_test_exe test_name)
+	add_executable(${test_name} ${ARGN})
+
+	target_link_libraries(${test_name}
+		PRIVATE
+		IntegrityCore
+		GTest::gtest_main
+	)
+
+	include(GoogleTest)
+	gtest_discover_tests(${test_name})
+endfunction()
+
+add_test_exe(IntegrityCoreTest
+    IntegrityCoreTest.cc
+    TestHelpers.cc
 )
 
-target_link_libraries(IntegrityCoreTest
-	PRIVATE
-	IntegrityCore
-	GTest::gtest_main
+add_test_exe(WriteModeTest
+    WriteModeTest.cc
 )
-
-include(GoogleTest)
-gtest_discover_tests(IntegrityCoreTest)
