@@ -1,4 +1,4 @@
-X #ifndef WRITEMODE_H
+#ifndef WRITEMODE_H
 #define WRITEMODE_H
 
 #include "IntegrityCore.h"
