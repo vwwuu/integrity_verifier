@@ -13,7 +13,7 @@ bool WriteMode::run(std::filesystem::path const& directoryPath,
     return false;
   }
 
-  return false;
+  return true;
 }
 
 bool WriteMode::writeRecord(DirectoryContent const& directoryContent,
