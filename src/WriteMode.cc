@@ -13,10 +13,11 @@ bool WriteMode::run(std::filesystem::path const& directoryPath,
     return false;
   }
 
-  return true;
+  DirectoryContent directoryContent = _core.scanDirectory(directoryPath);
+  return writeRecord(directoryContent, outputPath);
 }
 
 bool WriteMode::writeRecord(DirectoryContent const& directoryContent,
 			    std::filesystem::path const& outputPath) {
-  return false;
+  return true;
 }
