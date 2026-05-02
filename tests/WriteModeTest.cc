@@ -18,4 +18,13 @@ TEST_F(WriteModeTestClass, ValidateWriteModePaths) {
     std::filesystem::create_directory(outputDir);
 
     EXPECT_TRUE(Writer.run(inputDir, outputDir));
+
+    std::error_code ec;
+    std::filesystem::remove_all(inputDir, ec);
+
+    EXPECT_FALSE(Writer.run(inputDir, outputDir));
+    
+    std::filesystem::remove_all(outputDir, ec);
+
+    EXPECT_FALSE(Writer.run(inputDir, outputDir));
 }
