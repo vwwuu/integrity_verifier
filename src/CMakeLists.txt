@@ -3,6 +3,7 @@ add_executable(${PROJECT_NAME} main.cc)
 add_library(IntegrityCore
 	IntegrityCore.cc
 	status_out.cc
+	WriteMode.cc
 )
 
 target_sources(IntegrityCore
