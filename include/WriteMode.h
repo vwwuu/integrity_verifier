@@ -2,10 +2,9 @@
 #define WRITEMODE_H
 
 #include "IntegrityCore.h"
-    
-#include <filesystem>
-
 #include "DirectoryContent.h"
+
+#include <filesystem>
 
 class WriteMode
 {
@@ -19,7 +18,7 @@ public:
   private:
   IntegrityCore& _core;
   
-  bool writeRecord(DirectoryContent const& directoryContent,
+  static bool writeRecord(DirectoryContent const& directoryContent,
 		   std::filesystem::path const& outputPath); // produce JSON file
 };
 
