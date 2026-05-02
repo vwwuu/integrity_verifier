@@ -10,7 +10,7 @@
 class WriteMode
 {
 public:
-  explicit WriteMode (IntegrityCore& core);
+  explicit WriteMode (IntegrityCore& core) : _core(core){}
 
   public:
   bool run(std::filesystem::path const& directoryPath,
@@ -18,6 +18,7 @@ public:
   
   private:
   IntegrityCore& _core;
+  
   bool writeRecord(DirectoryContent const& directoryContent,
 		   std::filesystem::path const& outputPath); // produce JSON file
 };
