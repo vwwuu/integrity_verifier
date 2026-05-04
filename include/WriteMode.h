@@ -5,6 +5,7 @@
 #include "DirectoryContent.h"
 
 #include <filesystem>
+#include <string>
 
 class WriteMode
 {
@@ -14,11 +15,13 @@ public:
   public:
   bool run(std::filesystem::path const& directoryPath,
 	   std::filesystem::path const& outputPath); // calls writeRecord
+  std::string getErrorMessage() const { return _errorMessage; }
   
   private:
   IntegrityCore& _core;
+  std::string _errorMessage;
   
-  static bool writeRecord(DirectoryContent const& directoryContent,
+  bool writeRecord(DirectoryContent const& directoryContent,
 		   std::filesystem::path const& outputPath); // produce JSON file
 };
 
