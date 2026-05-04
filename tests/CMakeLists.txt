@@ -18,7 +18,7 @@ function(add_test_exe test_name)
 
 	target_link_libraries(${test_name}
 		PRIVATE
-		IntegrityCore
+		Integrity
 		GTest::gtest_main
 	)
 
